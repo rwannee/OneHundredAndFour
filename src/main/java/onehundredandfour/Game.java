@@ -5,13 +5,15 @@ import java.util.List;
 
 public class Game {
 	private final List<Player> players;
+	private final ArrayList<?> deck;
 	private final List<Card> row0 = new ArrayList<>();
 	private final List<Card> row1 = new ArrayList<>();
 	private final List<Card> row2 = new ArrayList<>();
 	private final List<Card> row3 = new ArrayList<>();
 
-	public Game(final List<Player> players) {
+	public Game(final List<Player> players, ArrayList<?> deck) {
 		this.players = players;
+		this.deck = deck;
 	}
 
 	public List<Player> getPlayers() {
@@ -32,5 +34,9 @@ public class Game {
 
 	public List<Card> getRow3() {
 		return row3;
+	}
+	
+	public ArrayList<?> getDeck() {
+		return deck;
 	}
 }

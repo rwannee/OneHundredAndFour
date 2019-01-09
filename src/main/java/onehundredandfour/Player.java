@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-	private final List<Card> hand;
+	private final List<?> hand;
 	private final List<Card> score = new ArrayList<>();
 	private Card cardOnTable;
 
-	public Player(final List<Card> hand) {
-		this.hand = hand;
+	public Player(final ArrayList<?> arrayList) {
+		this.hand = arrayList;
 	}
 
-	public List<Card> getHand() {
+	public List<?> getHand() {
 		return hand;
 	}
 
@@ -26,5 +26,9 @@ public class Player {
 
 	public void setCardOnTable(final Card cardOnTable) {
 		this.cardOnTable = cardOnTable;
+	}
+	
+	public void addToScore(Card score) {
+		this.score.add(score);
 	}
 }
