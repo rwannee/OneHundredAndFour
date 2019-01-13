@@ -7,27 +7,20 @@ import org.junit.Test;
 
 public class CardsTest {
 	
-@Test
-public void test() {
-	ArrayList<Cards> deck = new ArrayList<Cards>();
-	for (Cards c : Cards.values()){
-	deck.add(c);
+	@Test
+	public void valuesTest() {
+		Cards card = Cards.C55;
+		assertEquals(55,card.getValue());
+		assertEquals(7, card.getScore());
 	}
-	assertEquals(true,deck.contains(Cards.C1));
-	}
-
-@Test
-public void test2() {
-	ArrayList<Cards> deck = new ArrayList<Cards>();
-	for (Cards c : Cards.values()){
-	deck.add(c);
-	}
-	GameHelper.shuffleDeck(deck, 5);
 	
-	for (Cards c : deck){
-		System.out.println(c.getValue());	
-	}
-	assertEquals(104,deck.size());
+	@Test
+	public void cardIsPresentTest() {
+		ArrayList<Cards> deck = new ArrayList<Cards>();
+		for (Cards c : Cards.values()){
+			deck.add(c);
+		}
+		assertEquals(true,deck.contains(Cards.C1));
 	}
 
 }

@@ -1,5 +1,5 @@
 package onehundredandfour;
-
+import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class GameTest {
+	Scanner reader = new Scanner(System.in);
 
 	@Test
 	public void GameplayTest() {
@@ -26,10 +27,10 @@ public class GameTest {
 			System.out.println(p1.getHand().get(i));
 			}
 
-		System.out.println("P2 cards");
-		for (int i=0;i < p2.getHand().size();i++) {
-			System.out.println(p2.getHand().get(i));
-			}
+//		System.out.println("P2 cards");
+//		for (int i=0;i < p2.getHand().size();i++) {
+//			System.out.println(p2.getHand().get(i));
+//			}
 		assertEquals(104, game.getDeck().size() + p1.getHand().size() + p2.getHand().size());
 		
 		game.getRow0().add(GameHelper.giveCard(deck));
@@ -44,7 +45,7 @@ public class GameTest {
 		i++;
 		}
 		calculateAndPrintScore(game);
-		
+		reader.close();
 	}
 
 	private void executeRound(Game game) {	
@@ -58,8 +59,12 @@ public class GameTest {
 	}
 	private void playersSetCardOnTable(List<Player> players) {	
 		for (Player player : players) {
-		player.setCardOnTable(GameHelper.playerPlaysCard(player.getHand(), 0));
-		}
+			if (player.equals(players.get(0))) {
+				players.get(0).realPlayerPlaysCard(reader);
+			}else {
+		player.setCardOnTable(Player.playerPlaysCard(player.getHand(), 0));
+		}}
+		
 	}
 
 	private void printRows(Game game) {
