@@ -8,7 +8,7 @@ import org.junit.Test;
 public class CardsTest {
 	
 	@Test
-	public void valuesTest() {
+	public void valueAndScoreTest() {
 		Cards card = Cards.C55;
 		assertEquals(55,card.getValue());
 		assertEquals(7, card.getScore());
@@ -23,4 +23,12 @@ public class CardsTest {
 		assertEquals(true,deck.contains(Cards.C1));
 	}
 
+	@Test
+	public void amountOfCardsTest() {
+		ArrayList<Cards> deck = new ArrayList<Cards>();
+		for (Cards c : Cards.values()){
+			deck.add(c);
+		}
+		assertEquals(104,deck.size());
+	}
 }

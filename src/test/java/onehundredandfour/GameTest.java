@@ -27,10 +27,6 @@ public class GameTest {
 			System.out.println(p1.getHand().get(i));
 			}
 
-//		System.out.println("P2 cards");
-//		for (int i=0;i < p2.getHand().size();i++) {
-//			System.out.println(p2.getHand().get(i));
-//			}
 		assertEquals(104, game.getDeck().size() + p1.getHand().size() + p2.getHand().size());
 		
 		game.getRow0().add(GameHelper.giveCard(deck));
@@ -59,11 +55,14 @@ public class GameTest {
 	}
 	private void playersSetCardOnTable(List<Player> players) {	
 		for (Player player : players) {
-			if (player.equals(players.get(0))) {
-				players.get(0).realPlayerPlaysCard(reader);
-			}else {
+		
+	//To test the user input, uncomment this section of the test.		
+	//		if (player.equals(players.get(0))) {
+	//			players.get(0).realPlayerPlaysCard(reader);
+	//		}else {
 		player.setCardOnTable(Player.playerPlaysCard(player.getHand(), 0));
-		}}
+	//	}
+		}
 		
 	}
 
