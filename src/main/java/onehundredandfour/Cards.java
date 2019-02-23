@@ -1,5 +1,8 @@
 package onehundredandfour;
 
+/**
+ * Cards implementation of Card.
+ */
 public enum Cards implements Card {
 	C1 (1, 1),
 	C2 (2, 1),
@@ -110,6 +113,14 @@ public enum Cards implements Card {
 	int faceValue;
 	int score;
 
+	/**
+	 * Cards constructor.
+	 * 
+	 * @param faceValue is the value of the card.
+	 * @param score is the score that the card holds.
+	 * @return the Cards.
+	 * 
+	 */
 	Cards(int faceValue, int score) {
         this.faceValue = faceValue;
         this.score = score;

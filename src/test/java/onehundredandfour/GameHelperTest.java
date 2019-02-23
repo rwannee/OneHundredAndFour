@@ -15,7 +15,7 @@ public class GameHelperTest {
 
 	@Test
 	public void createDeckTest() {
-		ArrayList<?> deck = GameHelper.createDeck();
+		List<Card> deck = GameHelper.createDeck();
 		for (Cards c : Cards.values()){
 			Assert.assertTrue(deck.contains(c));
 		}
@@ -23,7 +23,7 @@ public class GameHelperTest {
 	
 	@Test
 	public void shuffleOnceImpactTest() {
-		ArrayList<Cards> deck = new ArrayList<Cards>();
+		List<Card> deck = new ArrayList<Card>();
 		for (Cards c : Cards.values()){
 			deck.add(c);
 		}
@@ -37,7 +37,7 @@ public class GameHelperTest {
 	
 	@Test
 	public void shuffleMultipleImpactTest() {
-		ArrayList<Cards> deck = new ArrayList<Cards>();
+		List<Card> deck = new ArrayList<Card>();
 		for (Cards c : Cards.values()){
 			deck.add(c);
 		}
@@ -51,25 +51,25 @@ public class GameHelperTest {
 	
 	@Test
 	public void createHandTest() {
-		ArrayList<?> deck = GameHelper.createDeck();
-		ArrayList<?> hand = GameHelper.createHand(deck);
+		List<Card> deck = GameHelper.createDeck();
+		List<Card> hand = GameHelper.createHand(deck);
 		assertEquals(10,hand.size());
 		assertEquals(Cards.C1, hand.get(0));
 	}
 	
 	@Test
 	public void giveCardTest() {
-		ArrayList<?> deck = GameHelper.createDeck();
+		List<Card> deck = GameHelper.createDeck();
 		Cards card = GameHelper.giveCard(deck);
 		assertEquals(Cards.C1, card);
 	}
 	
 	@Test
-	public void getPlayersCardsOnTableAndLowestCardTest() {
+	public void getPlayersCardsOnTableAndLowestCardTest() throws Exception {
 		//Deck and hands created
-		ArrayList<?> deck = GameHelper.createDeck();
-		ArrayList<?> hand1 = GameHelper.createHand(deck);
-		ArrayList<?> hand2 = GameHelper.createHand(deck);
+		List<Card> deck = GameHelper.createDeck();
+		List<Card> hand1 =  GameHelper.createHand(deck);
+		List<Card> hand2 =  GameHelper.createHand(deck);
 		
 		//Players created and added to list of players
 		List<Player> players = new ArrayList<>();
@@ -79,11 +79,11 @@ public class GameHelperTest {
 		players.add(two);
 		
 		//Cards are set to table
-		one.setCardOnTable((Card) one.getHand().get(0));
-		two.setCardOnTable((Card) two.getHand().get(0)); 
+		one.setCardOnTable(one.getHand().get(0));
+		two.setCardOnTable(two.getHand().get(0)); 
 		
 		//method getPlayersCardsOnTable is tested
-		List<Card> result = new ArrayList<Card>();
+		List<Cards> result = new ArrayList<Cards>();
 		result = GameHelper.getPlayersCardsOnTable(players);
 		assertEquals(one.getCardOnTable(), result.get(0));
 		assertEquals(two.getCardOnTable(), result.get(1));
@@ -98,12 +98,12 @@ public class GameHelperTest {
 	}
 	
 	@Test
-	public void checkPlayerCardAgainstRowsPositiveTest() {
+	public void checkPlayerCardAgainstRowsPositiveTest() throws Exception {
 		//Deck and hands created
-		ArrayList<?> deck = GameHelper.createDeck();
+		List<Card> deck = GameHelper.createDeck();
 		Card C1 = (Card) GameHelper.giveCard(deck);
-		ArrayList<?> hand1 = GameHelper.createHand(deck);
-		ArrayList<?> hand2 = GameHelper.createHand(deck);
+		List<Card> hand1 = GameHelper.createHand(deck);
+		List<Card> hand2 = GameHelper.createHand(deck);
 		
 		//Players created and added to list of players
 		List<Player> players = new ArrayList<>();
@@ -133,11 +133,11 @@ public class GameHelperTest {
 	}
 	
 	@Test
-	public void checkPlayerCardAgainstRowsNegativeTest() {
+	public void checkPlayerCardAgainstRowsNegativeTest() throws Exception {
 		//Deck and hands created
-		ArrayList<?> deck = GameHelper.createDeck();
-		ArrayList<?> hand1 = GameHelper.createHand(deck);
-		ArrayList<?> hand2 = GameHelper.createHand(deck);
+		List<Card> deck = GameHelper.createDeck();
+		List<Card> hand1 =  GameHelper.createHand(deck);
+		List<Card> hand2 =  GameHelper.createHand(deck);
 		
 		//Players created and added to list of players
 		List<Player> players = new ArrayList<>();
@@ -170,11 +170,11 @@ public class GameHelperTest {
 	
 	@Test
 	public void tradeCardForRowTest() {
-		ArrayList<?> deck = GameHelper.createDeck();
+		List<Card> deck = GameHelper.createDeck();
 		List<Card> row = new ArrayList<>();
 		row.add((Card) deck.get(54));
 		deck.remove(54);
-		ArrayList<?> hand1 = GameHelper.createHand(deck);
+		List<Card> hand1 =  GameHelper.createHand(deck);
 		
 		Player one = new Player(hand1);
 		one.setCardOnTable((Card) one.getHand().get(0));
@@ -188,7 +188,7 @@ public class GameHelperTest {
 	
 	@Test
 	public void getRowTest() throws Exception {
-		ArrayList<?> deck = GameHelper.createDeck();
+		List<Card> deck = GameHelper.createDeck();
 		
 		Game game = new Game(null, deck);
 		game.getRow0().add(GameHelper.giveCard(deck));
@@ -208,7 +208,7 @@ public class GameHelperTest {
 	
 	@Test(expected=Exception.class)
 	public void getRowExceptionTest() throws Exception {
-		ArrayList<?> deck = GameHelper.createDeck();
+		List<Card> deck = GameHelper.createDeck();
 		
 		Game game = new Game(null, deck);
 		game.getRow0().add(GameHelper.giveCard(deck));

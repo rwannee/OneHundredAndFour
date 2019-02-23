@@ -10,9 +10,9 @@ public class GameTest {
 	Scanner reader = new Scanner(System.in);
 
 	@Test
-	public void GameplayTest() {
+	public void GameplayTest() throws Exception {
 		ArrayList<Player> players = new ArrayList<>();
-		ArrayList<?> deck = GameHelper.createDeck();
+		List<Card> deck = GameHelper.createDeck();
 		GameHelper.shuffleDeck(deck);
 		
 		Player p1 = new Player(GameHelper.createHand(deck));
@@ -44,7 +44,7 @@ public class GameTest {
 		reader.close();
 	}
 
-	private void executeRound(Game game) {	
+	private void executeRound(Game game) throws Exception {	
 		playersSetCardOnTable(game.getPlayers());
 		while(!GameHelper.getPlayersCardsOnTable(game.getPlayers()).isEmpty()) {
 		System.out.println("Lowest Card is: "+ GameHelper.whoHasLowestCard(GameHelper.getPlayersCardsOnTable(game.getPlayers())));
