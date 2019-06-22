@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.ImmutableList;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -26,6 +28,7 @@ public class RestApis {
 	private static final String version = "0.0.1";
 	List<Card> deck = GameHelper.createDeck();
 	List<Player> players = new ArrayList<>();
+	ImmutableList<Player> immutableList;
 	Game game = null;
 	
 	private static final String template = "Hello, the version of this application is: %s!";
@@ -66,8 +69,12 @@ public class RestApis {
      *
      */
     @RequestMapping(value = "/getPlayers", method = GET)
-    public List<Player> getPlayers() {
-        return players;
+    public List<Player> getPlayers(@RequestParam(value="type") String type) {
+    	if ("all".equals(type)) {
+        return players;}
+    	else if ("game".equals(type)) {
+    		return immutableList;
+    	}else {return null;}
     }
     
     /**
@@ -76,7 +83,8 @@ public class RestApis {
      */
     @RequestMapping(value = "/startGame", method = GET)
     public String startGame() {
-    	game = new Game(players, deck);
+    	immutableList = ImmutableList.copyOf(players);
+    	game = new Game(immutableList, deck);
     	game.getRow0().add(GameHelper.giveCard(deck));
 		game.getRow1().add(GameHelper.giveCard(deck));
 		game.getRow2().add(GameHelper.giveCard(deck));
