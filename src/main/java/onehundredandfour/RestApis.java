@@ -4,6 +4,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -15,6 +20,8 @@ import java.util.List;
  *
  */
 @RestController
+@RequestMapping("/v1") 
+@Api(value="restapis", description="All controllers available for the 104 application.")
 public class RestApis {
 	private static final String version = "0.0.1";
 	List<Card> deck = GameHelper.createDeck();
@@ -27,6 +34,12 @@ public class RestApis {
 	 * About service, showing the version of the app.
 	 *
 	 */
+	@ApiOperation(value="Details about the 104 application.")
+
+@ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Succesfully retrieved message.")
+}
+)
     @RequestMapping(value = "/about", method = GET)
     public static String getVersion() {
         return new String(String.format(template, version));
