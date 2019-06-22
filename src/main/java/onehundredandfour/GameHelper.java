@@ -120,19 +120,20 @@ public class GameHelper {
 	 * @throws NoSuchElementException when the comparison of card values cannot be executed.
 	 */
 	public static Player getPlayerWithLowestCardOnTable(List<Player> players) throws NoSuchElementException {
-		List<Player> playersInGame = new ArrayList<Player>(players);
+		List<Player> playersInGame = new ArrayList<Player>();
 		Player playerWithLowestCard;
-		for (Player player : playersInGame) {
-			if (player.getCardOnTable() == null) {
-				playersInGame.remove(player);
+		for (Player player : players) {
+			if (player.getCardOnTable() != null) {
+				playersInGame.add(player);
 			}
 		}
-		if (playersInGame.size() < 1) {
+		if (playersInGame.size() > 1) {
 		playerWithLowestCard = playersInGame
 			      .stream()
 			      .min(Comparator.comparing( plyr -> plyr.getCardOnTable().getValue()))
 			      .orElseThrow(NoSuchElementException::new);
 		}else {playerWithLowestCard = playersInGame.get(0);}
+		System.out.println(playerWithLowestCard.getId());
 		return playerWithLowestCard;
 		}
 	
@@ -202,7 +203,7 @@ public class GameHelper {
 		row.clear();
 		
 		row.add(player.getCardOnTable());
-		player.setCardOnTable(null);
+		player.removeCardOnTable();
 	}
 	
 	/**
@@ -216,7 +217,7 @@ public class GameHelper {
 		if(after.get(0).equals(row.get(row.size() -1))) {
 			if (row.size() < 5) {
 				row.add(player.getCardOnTable());
-				player.setCardOnTable(null);
+				player.removeCardOnTable();
 			}else {
 				tradeCardForRow(player, row);
 				System.out.println("Row is taken");
