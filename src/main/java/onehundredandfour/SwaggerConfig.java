@@ -21,7 +21,6 @@ public class SwaggerConfig {
                 .select()                 
                 .apis(RequestHandlerSelectors.basePackage("onehundredandfour"))
                 .paths(PathSelectors.any())
-                //.paths(PathSelectors.regex("/v1"))
                 .build()
                 .apiInfo(metaData());
     }
@@ -32,9 +31,9 @@ public class SwaggerConfig {
                 "Spring Boot REST API for 104 Game",
                 "1.0",
                 "Terms of service",
-                new Contact("The A-Team", "abnamro.com", "jack.cornelisse@nl.abnamro.com"),
+                new Contact("The A-Team", "anywebsite.com", "anydev@blabla.com"),
                "A-TEAM License Version 2.0",
-                "https://www.apache.org/licenses/LICENSE-2.0");
+                "anyurl.com");
         return apiInfo;
     }
 }
