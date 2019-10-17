@@ -3,11 +3,13 @@ package onehundredandfour;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 /**
  * Player class.
  */
 public class Player {
+	private final String id;
 	private final List<Card> hand;
 	private final List<Card> score = new ArrayList<>();
 	private Card cardOnTable;
@@ -19,6 +21,7 @@ public class Player {
 	 * @return the player.
 	 */
 	public Player(final List<Card> hand) {
+		this.id = UUID.randomUUID().toString();
 		this.hand = hand;
 	}
 
@@ -40,7 +43,22 @@ public class Player {
 	 * @param cardOnTable the card that will be 'played' as card on table.
 	 */
 	public void setCardOnTable(final Card cardOnTable) {
+		if(this.cardOnTable == null) {
 		this.cardOnTable = cardOnTable;
+		}
+		else {
+			hand.add(this.cardOnTable);
+			this.cardOnTable = cardOnTable;
+		}
+	}
+	
+	/**
+	 * removeCardOnTable will remove the card from cardOnTable.
+	 * 
+	 */
+	public void removeCardOnTable() {
+		this.cardOnTable = null;
+		
 	}
 	
 	/**
@@ -60,7 +78,7 @@ public class Player {
 	 * @return the card that is played.
 	 */
 	public static Card playerPlaysCard(List<Card> hand, int location) {
-	Card card =  hand.remove(location);
+		Card card =  hand.remove(location);
 	return card;
 	}
 	
@@ -91,5 +109,9 @@ public class Player {
 			System.out.println("Enter the location of your card: ");
 			location = reader.nextInt();
 		return location;
+	}
+
+	public String getId() {
+		return id;
 	}
 }
